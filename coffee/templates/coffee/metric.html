@@ -1,0 +1,100 @@
+{% extends "coffee/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container" style="background-color: #B9FF66; border-radius: 20px; padding: 25px; border-color: black;
+box-shadow: 0px 5px 0px 0px black;
+border-radius: 30px;
+border-style: solid;
+border-width: 1px;">
+    <h1>{{metric.name}}</h1>
+    <hr>
+    <h4>{{metric.description}}</h4>
+</div>
+<br>
+<div class="row">
+    <div class="col-7 card" id="graphCanvas">
+    {% if graph %}
+    <img src="data:image/png;base64,{{ graph|safe }}" alt="График">
+    {% else %}
+    <p>График пока не загружен.</p>
+   {% endif %}
+</div>
+<div class="col container">
+    <br>
+    <h6>Введите временной промежуток для генерации отчета:</h6>
+    <div>
+        <form method="get">
+            {{ form.as_p }}
+            <!-- <input type="date" id="start_date">
+            <input type="date" id="end_date">  -->
+            <button class="btn btn-primary" id="buttonGraph", type="submit", style="margin-top: 3%;">
+                Создать
+            </button>
+        </form>
+
+
+    </div>
+   
+    
+    <br><br>
+    <h6>Сохранить график в локальное хранилище на вашем компьютере</h6>
+    <button class="btn btn-dark" id="downloadGraph">Сохранить</button>
+    <br><br>
+    <h6>Сохранить график в архив на сайте</h6>
+<form method="post" action="{% url 'save_to_archive' %}">
+    {% csrf_token %}
+    <input type="hidden" name="graph_base64" value="{{ graph }}">
+    <input type="hidden" name="table_base64" value="{{ table }}">
+    <input type="hidden" name="metric_name" value="{{ metric.name }}">
+    <input type="hidden" name="metric_description" value="{{ metric.description }}">
+    <button type="submit" class="btn btn-dark">Архив</button>
+</form>
+    <br><br>
+    <h6>Сохранить отчёт в локальное хранилище на вашем компьютере</h6>
+    <button id="downloadTable" class="btn btn-dark" style="margin-top: 10px;">Скачать отчёт</button>
+</div>
+</div>
+<br>
+<br>
+<br>
+<script>
+    document.getElementById('downloadGraph').addEventListener('click', function() {
+        const img = document.querySelector('#graphCanvas img');
+        if (!img) {
+            alert('График не найден!');
+            return;
+        }
+    
+        const link = document.createElement('a');
+        link.href = img.src;
+        link.download = 'graph.png'; 
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+    document.getElementById('downloadTable').addEventListener('click', function() {
+    const tableData = "{{ table|safe }}"; 
+
+    if (!tableData) {
+        alert('Таблица не найдена!');
+        return;
+    }
+
+    const byteCharacters = atob(tableData);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], { type: 'text/csv;charset=utf-8;' });
+
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'report.csv';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+});
+
+    </script>
+{% endblock %}

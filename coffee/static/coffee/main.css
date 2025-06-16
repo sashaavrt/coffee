@@ -1,0 +1,398 @@
+/* Базовые настройки */
+body {
+  font-family: 'Ubuntu Mono', sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  padding-top: 5rem;
+}
+
+/* Заголовки */
+h1, h2, h4, h5, h6 {
+  color: black;
+  margin-bottom: 20px;
+}
+
+/* Кнопки */
+.btn-primary {
+  background-color: #B9FF66;
+  color: black;
+  border: none;
+  width: 160px;
+  height: 50px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #A0E755;
+  color: black;
+}
+
+.btn-dark {
+  background-color: black;
+  color: white;
+  width: 160px;
+  height: 50px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.btn-dark:hover {
+  background-color: #333333;
+  color: white;
+}
+
+.btn-outline-dark {
+  background: transparent;
+  color: black;
+  border: 2px solid black;
+  width: 140px;
+  height: 45px;
+  font-size: 16px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.btn-outline-dark:hover {
+  background-color: black;
+  color: white;
+}
+
+/* Карточки */
+.card {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 20px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  margin: 1%;
+  padding: 25px;
+  margin-bottom: 30px;
+}
+
+/* Основной контейнер */
+/* .container {
+  color: ;
+} */
+
+/* Заголовочный блок для метрик */
+.metric-header {
+  background-color: #B9FF66;
+  border-radius: 25px;
+  padding: 30px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* Секция формы */
+.form-section {
+  background-color: #f9f9f9;
+  padding: 25px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Секции в колонках */
+.section-title {
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Стили для графиков */
+#graphCanvas img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* Отступы между секциями */
+.mt-3 {
+  margin-top: 1rem;
+}
+.mt-5 {
+  margin-top: 3rem;
+}
+.mb-3 {
+  margin-bottom: 1rem;
+}
+.mb-5 {
+  margin-bottom: 3rem;
+}
+
+.footer {
+  background-color: #333333;
+}
+
+
+ 
+ 
+p {
+    text-align: justify;
+  }
+ 
+
+  
+  .bg-steel {
+    background-color: #f5f5f5;
+  }
+  
+  .site-header .navbar-nav .nav-link {
+    color: black;
+  }
+  
+  .site-header .navbar-nav .nav-link:hover {
+    color: black;
+  }
+  
+  .site-header .navbar-nav .nav-link.active {
+    color: black;
+    font-weight: 500;
+  }
+  
+  .content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+  }
+  
+  .article-title {
+    color: black;
+  }
+  
+  a.article-title:hover {
+    color: #B9FF66;
+    text-decoration: none;
+  }
+  
+  .article-content {
+    white-space: pre-line;
+  }
+  
+  .article-img {
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
+  }
+  
+  .article-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3
+  }
+  
+  .article-metadata a:hover {
+    color: black;
+    text-decoration: none;
+  }
+  
+  .article-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+  }
+  
+  .account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .account-heading {
+    font-size: 2.5rem;
+  }
+
+  #authForm {
+    margin-top: 5%;
+  }
+
+  #id_username, #id_password {
+    margin-bottom: 1%;
+    height: 50px;
+    padding: 10px;
+    font-size: 22px;
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    width: 100%;
+
+  }
+
+  #centeredContainer {
+    text-align: center;
+  }
+
+  #CoffeeCrew {
+    font-size: 68px;
+    font-family: "Tourney";
+    font-weight: 550;
+  }
+
+#mainParagraph {
+    padding-top: 3%
+}
+#mainName {
+    padding-left: 1.5%;
+    padding-top: 3%;
+}
+
+/* .btn-dark {
+    width: 150px;
+    height: 50px;
+    font-size: 22px;
+} */
+
+/* .btn-outline-dark {
+    width: 100px;
+    height: 40px;
+   
+} */
+
+/* .btn-primary {
+    background-color: #B9FF66;
+    color: black;
+    border: none;
+    width: 150px;
+    height: 50px;
+    font-size: 22px;
+} */
+
+
+/* .card {
+    margin: 1%;
+    background-color: #F3F3F3;
+    border-color: black;
+    box-shadow: 0px 5px 0px 0px black;
+    border-radius: 30px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+   
+} */
+
+h2 {
+    font-size: 24px;
+}
+
+.description {
+    font-size: 16px;
+
+}
+
+.link {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .heading-and-link {
+    display: flex;
+    flex-direction: column;
+    /* gap: 93px; */
+    align-items: flex-start;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+.label {
+    background: #B9FF66;
+    border-radius: 7px;
+    justify-content: space-around;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.label3 {
+    color: black;
+    text-align: left;
+    font-family:  "Ubuntu Mono", serif;
+    font-size: 18px;
+    position: relative;
+  }
+
+ #icon {
+    flex-shrink: 0;
+    position: relative;
+    overflow: visible;
+  }
+
+  .label2 {
+    color: black;
+    text-align: left;
+    position: relative;
+  }
+
+ #cardGrid {
+    padding-top: 1%;
+    position: relative;
+ }
+
+ #details_Main {
+    background-color: white;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 20px;
+    padding: 20px;
+    font-size: 18px;
+    margin-top: 1.5%;
+ }
+ details > summary {
+  font-size: 22px;
+  font-weight: 600;
+  padding-bottom: 5px;
+ }
+
+ .footer {
+    background-color: black;
+    height: 250px;
+    border-radius: 20px;
+    margin-top: 3%;
+    margin-bottom: 1%;
+ }
+
+ #footercont {
+    padding: 2%;
+ }
+
+ .whiteP {
+    color: white;
+    font-size: 18px;
+ }
+
+ h3 {
+    color: white;
+    font-size: 22px;
+ }
+ .preformatted-text {
+    white-space: pre-wrap; 
+  }
+
+  #whiteLogoFooter {
+    padding-bottom: 2%;
+  }
+
+.a {
+  text-align: center;
+}
+
+
+
+
+

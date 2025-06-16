@@ -1,0 +1,53 @@
+{% extends "coffee/base.html" %}
+{% load static %}
+{% block content %}
+<br>
+<div class="row">
+    <div class="col-2">
+    <img width="150" src="{% static 'coffee/images/bigAvatar.svg' %}">
+</div>
+<div class="col">
+    <h1>Привет, {{user.first_name}}!</h1>
+    <h2>Твоя роль: {{user.last_name}}.</h2>
+    <h2>Доступные функции для твоей роли ниже. Нажмите на кнопку модели или метрики, которую хотите использовать.</h2>
+</div>
+</div>
+<br>
+<div class="row">
+<div class="col-2"></div>
+<div class="col">
+    <a class="btn btn-dark" href="{% url 'profile' %}" style="height: auto;">Модели</a>
+    <a class="btn btn-dark" href="{% url 'profileMetrics' %}" style="height: auto;">Метрики</a>
+</div>
+</div>
+<div class="row" id="cardGrid">
+  {% for item in user.mlmodels.all %}
+   
+    <div class="col-12 col-md-5 card">
+            <div class="heading-and-link">
+              <div class="heading">
+                <div class="label">
+                  <h2 class="label2">{{item.name}}</h2>
+                </div>
+              </div>
+              <div class="link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="black" class="bi bi-arrow-up-right-circle-fill" viewBox="0 0 16 16" id="icon">
+                    <path d="M0 8a8 8 0 1 0 16 0A8 8 0 0 0 0 8m5.904 2.803a.5.5 0 1 1-.707-.707L9.293 6H6.525a.5.5 0 1 1 0-1H10.5a.5.5 0 0 1 .5.5v3.975a.5.5 0 0 1-1 0V6.707z"/>
+                  </svg>
+                <div class="label3">
+                  <a href="{% url 'mlmodel' item.id %}" style="color: black;">
+                  Начать с {{ item.name }}
+                </a></div>
+              </div>
+            </div>
+            <div class="description">
+              <p>{{item.description}}</p>
+            </div>
+          </div>
+        
+    {% endfor %}
+</div>
+<br>
+<br>
+{% endblock content %}
+

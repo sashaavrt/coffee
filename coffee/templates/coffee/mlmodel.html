@@ -1,0 +1,301 @@
+{% extends 'coffee/base.html' %}
+{% block content %}
+
+<h1 class="text-3xl font-bold mb-6">{{ mlmodel.name }}</h1>
+<p class="text-sm text-gray-800">
+      🧪 <span class="font-semibold">Качество модели:</span>
+      <span class="font-bold text-green-700">{{ mlmodel.quality }}%</span>
+    </p>
+    <p class="text-sm text-yellow-800 mt-1">
+      ⚠️ Обратите внимание: прогноз является приближённым и может содержать погрешности.
+    </p>
+
+{% if mlmodel.id == 1 %}
+  <form method="POST" class="card">
+    {% csrf_token %}
+    <div class="mb-4">
+      <label for="start_date" class="font-semibold">Начальная дата:</label>
+      <input type="date" id="start_date" name="start_date" class="border p-2 rounded mr-2">
+
+      <label for="end_date" class="font-semibold">Конечная дата:</label>
+      <input type="date" id="end_date" name="end_date" class="border p-2 rounded">
+    </div>
+
+    <div class="mb-4">
+      <label class="font-semibold block mb-2">Фильтр по точкам продаж:</label>
+      {% for loc in all_locations %}
+        <label class="inline-flex items-center mr-4">
+          <input type="checkbox" name="locations" value="{{ loc }}" class="mr-1">
+          {{ loc }}
+        </label>
+      {% endfor %}
+    </div>
+
+    <button type="submit" class="btn-primary">
+      Предсказать
+    </button>
+  </form>
+  <form method="post" action="{% url 'save_to_archive' %}">
+    {% csrf_token %}
+    <input type="hidden" name="graph_base64" value="{{ graph|safe }}">
+    <input type="hidden" name="table_base64" value="{{ table|safe }}">
+    <input type="hidden" name="mlmodel_id" value="{{ mlmodel.id }}">
+    <input type="hidden" name="metric_name" value="{{ mlmodel.name }}">
+    <input type="hidden" name="metric_description" value="Результат прогноза по модели {{ mlmodel.name }}">
+    <button type="submit" class="btn btn-dark">Архив</button>
+</form>
+ <br>
+
+  {% if forecast_summary %}
+    <div class="mb-6">
+      <h2 class="text-xl font-bold mb-2">Результат:</h2>
+      <p class="text-2xl text-blue-800 font-bold mb-4">{{ forecast_summary }}</p>
+      <canvas id="forecastChart" class="w-full max-w-3xl"></canvas>
+    </div>
+    <br>
+    <br>
+  {% endif %}
+{% elif mlmodel.id == 2 %}
+  <form method="POST" class="card mb-6">
+    {% csrf_token %}
+    <div class="mb-4">
+      <label for="start_date" class="font-semibold">Начальная дата:</label>
+      <input type="date" id="start_date" name="start_date" class="border p-2 rounded mr-2" required>
+
+      <label for="end_date" class="font-semibold">Конечная дата:</label>
+      <input type="date" id="end_date" name="end_date" class="border p-2 rounded">
+    </div>
+
+    <button type="submit" class="btn-primary">Предсказать</button>
+  </form>
+   {% if forecast_list %}
+  <form method="post" action="{% url 'save_to_archive' %}">
+    {% csrf_token %}
+    <input type="hidden" name="table_base64" value="{{ table|safe }}">
+    <input type="hidden" name="graph_base64" value="">
+    <input type="hidden" name="mlmodel_id" value="{{ mlmodel.id }}">
+    <input type="hidden" name="metric_name" value="{{ mlmodel.name }}">
+    <input type="hidden" name="metric_description" value="Результат прогноза по модели {{ mlmodel.name }}">
+    <button type="submit" class="btn btn-dark">Архив</button>
+  </form>
+{% endif %}
+
+ <br>
+  {% if forecast_list %}
+    <div class="mb-6">
+      <h2 class="text-xl font-bold mb-2">Топ-3 популярных позиций:</h2>
+      <ul class="list-disc ml-6 text-lg">
+        {% for line in forecast_list %}
+          <li>{{ line }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+{% elif mlmodel.id == 3 %}
+  <form method="POST" class="card mb-6">
+    {% csrf_token %}
+    <div class="mb-4">
+      <label for="start_date" class="font-semibold">Начальная дата:</label>
+      <input type="date" id="start_date" name="start_date" class="border p-2 rounded mr-2" required>
+
+      <label for="end_date" class="font-semibold">Конечная дата:</label>
+      <input type="date" id="end_date" name="end_date" class="border p-2 rounded">
+    </div>
+
+    <button type="submit" class="btn-primary">Предсказать</button>
+  </form>
+ <form method="post" action="{% url 'save_to_archive' %}">
+    {% csrf_token %}
+    <input type="hidden" name="graph_base64" value="{{ graph|safe }}">
+    <input type="hidden" name="table_base64" value="{{ table|safe }}">
+    <input type="hidden" name="mlmodel_id" value="{{ mlmodel.id }}">
+    <input type="hidden" name="metric_name" value="{{ mlmodel.name }}">
+    <input type="hidden" name="metric_description" value="Результат прогноза по модели {{ mlmodel.name }}">
+    <button type="submit" class="btn btn-dark">Архив</button>
+</form>
+ <br>
+  {% if forecast_summary %}
+    <div class="mb-6">
+      <h2 class="text-xl font-bold mb-2">Результат:</h2>
+      <p class="text-xl text-orange-800 font-bold mb-4">{{ forecast_summary }}</p>
+      <canvas id="forecastChart" class="w-full max-w-3xl"></canvas>
+    </div>
+  {% endif %}
+{% elif mlmodel.id == 4 %}
+  <form method="POST" class="card mb-6">
+    {% csrf_token %}
+    <div class="mb-4">
+      <label for="start_date" class="font-semibold">Начальная дата:</label>
+      <input type="date" id="start_date" name="start_date" class="border p-2 rounded mr-2" required>
+
+      <label for="end_date" class="font-semibold">Конечная дата:</label>
+      <input type="date" id="end_date" name="end_date" class="border p-2 rounded">
+    </div>
+
+    <button type="submit" class="btn-primary">Предсказать</button>
+  </form>
+ {% if forecast_list %}
+  <form method="post" action="{% url 'save_to_archive' %}">
+    {% csrf_token %}
+    <input type="hidden" name="table_base64" value="{{ table|safe }}">
+    <input type="hidden" name="graph_base64" value="">
+    <input type="hidden" name="mlmodel_id" value="{{ mlmodel.id }}">
+    <input type="hidden" name="metric_name" value="{{ mlmodel.name }}">
+    <input type="hidden" name="metric_description" value="Результат прогноза по модели {{ mlmodel.name }}">
+    <button type="submit" class="btn btn-dark">Архив</button>
+  </form>
+{% endif %}
+
+ <br>
+  {% if forecast_list %}
+    <div class="mb-6">
+      <h2 class="text-xl font-bold mb-2">Прогнозируемые поставки:</h2>
+      <ul class="list-disc ml-6 text-lg">
+        {% for line in forecast_list %}
+          <li>{{ line }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+{% endif %}
+
+<br>
+<br>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const canvas = document.getElementById("forecastChart") || document.getElementById("trendChart");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+
+  const labels = {{ chart_labels|safe }};
+  const chartData = {{ chart_values|safe }};
+
+
+  let yLabel = "";
+  let chartType = "line";
+  {% if mlmodel.id == 1 %}
+    yLabel = "Продажи";
+    chartType = "bar";
+  {% elif mlmodel.id == 2 %}
+    yLabel = "Тренды";
+  {% elif mlmodel.id == 3 %}
+    yLabel = "Загрузка персонала";
+  {% elif mlmodel.id == 4 %}
+    yLabel = "Поставки";
+  {% endif %}
+
+  const baseDataset = {
+    label: yLabel,
+    data: chartData,
+    backgroundColor: chartType === 'bar' ? 'rgba(54, 162, 235, 0.6)' : 'rgba(54, 162, 235, 0.3)',
+    borderColor: 'rgba(54, 162, 235, 1)',
+    borderWidth: 2,
+    fill: chartType !== 'bar',
+    tension: 0.4,
+    pointRadius: chartType === 'bar' ? 0 : 3,
+    type: chartType
+  };
+
+  const thresholdLines = [
+    {
+      label: 'Низкая',
+      data: Array(labels.length).fill(10),
+      borderColor: 'green',
+      borderDash: [6, 3],
+      borderWidth: 2,
+      fill: false,
+      pointRadius: 0,
+      type: 'line'
+    },
+    {
+      label: 'Средняя',
+      data: Array(labels.length).fill(20),
+      borderColor: 'orange',
+      borderDash: [6, 3],
+      borderWidth: 2,
+      fill: false,
+      pointRadius: 0,
+      type: 'line'
+    },
+    {
+      label: 'Выше средней',
+      data: Array(labels.length).fill(30),
+      borderColor: 'orangered',
+      borderDash: [6, 3],
+      borderWidth: 2,
+      fill: false,
+      pointRadius: 0,
+      type: 'line'
+    },
+    {
+      label: 'Максимальная',
+      data: Array(labels.length).fill(35),
+      borderColor: 'red',
+      borderDash: [6, 3],
+      borderWidth: 2,
+      fill: false,
+      pointRadius: 0,
+      type: 'line'
+    }
+  ];
+
+const config = {
+  type: chartType,
+  data: {
+    labels: labels,
+    datasets: [baseDataset, ...thresholdLines]
+  },
+  options: {
+    responsive: true,
+    animation: {
+      onComplete: function () {
+        const graphInput = document.querySelector('input[name="graph_base64"]');
+        if (graphInput && canvas) {
+          try {
+            const imageData = canvas.toDataURL("image/png");
+            graphInput.value = imageData;
+            console.log("📈 График сохранён в input.");
+          } catch (err) {
+            console.error("❌ Ошибка при сохранении графика:", err);
+          }
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        position: 'top',
+      }
+    },
+    interaction: {
+      mode: 'index',
+      intersect: false
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: yLabel
+        }
+      }
+    }
+  }
+};
+
+
+  new Chart(ctx, config);
+const graphInput = document.querySelector('input[name="graph_base64"]');
+  if (graphInput && canvas) {
+    try {
+      const imageData = canvas.toDataURL("image/png");
+      graphInput.value = imageData;
+    } catch (err) {
+      console.error("Ошибка при получении изображения из canvas:", err);
+    }
+  }
+});
+</script>
+
+{% endblock %}

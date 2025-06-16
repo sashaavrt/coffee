@@ -1,0 +1,33 @@
+{% extends "coffee/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
+            <ul class="nav nav-pills flex-column mb-auto">
+              <li class="nav-item">
+                <a href="{% url 'archive' %}" class="nav-link text-dark" aria-current="page">  
+                  Модели
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'archiveMetrics' %}" class="nav-link active text-white bg-dark">      
+                  Метрики
+                </a>
+              </li>
+            </ul>
+          </div>
+
+    <div class="col-lg-9">
+    {% for a in archive %}
+    <div id="details_Main">
+    <details>
+        <summary>{{a.date}}</summary>
+        <p>{{a.description}}</p>
+    </details>
+</div>
+    {% endfor %}
+</div>
+</div>
+</div>
+{% endblock content %}

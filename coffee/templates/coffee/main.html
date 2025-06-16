@@ -1,0 +1,94 @@
+{% extends "coffee/base.html" %}
+{% load static %}
+{% block content %}
+<div id="mainParagraph" class="row">
+<div class="col">
+    <h1>Ознакомьтесь с моделями</h1>
+    <p>Здесь вы найдёте все инструменты для эффективной и лёгкой работы: графики продаж, отчёты о загруженности, прогнозы спроса и рекомендации, основанные на данных. Каждый отчёт создан для того, чтобы помочь вам лучше планировать день, видеть скрытые тренды и принимать решения быстро и уверенно.</p>
+
+     <p>Мы верим, что сильная команда строится не только на опыте, но и на знании. Наш портал делает аналитику простой и понятной, чтобы у вас было больше времени для главного — радовать наших гостей и создавать атмосферу уюта.</p>
+      
+     <p>Используйте возможности данных, чтобы двигаться вперёд вместе с нами. Спасибо за ваш труд, ваше внимание к деталям и вашу энергию. Впереди — новые идеи, новые достижения и тысячи счастливых гостей!</p>
+    <a href="{% url 'guide' %}"><button class="btn btn-dark">Начать</button></a>
+</div>
+<div class="col col-lg-5">
+    <img width="400" src="{% static 'coffee/images/illustration.svg' %}">
+</div>
+</div>
+<hr>
+<div id="mainName" class="row">
+    <a href="{% url 'guide' %}"><button class="btn btn-primary">Модели</button></a>
+    <h6 class="col">Модели машинного обучения, позволяющие делать прогнозы. С подробностями ознакомьтесь в разделе "Руководства" или по кнопке слева. Загляните в будушее!</h6>
+</div>
+<div class="row" id="cardGrid">
+    {% for item in user.mlmodels.all %}
+    <div class="col-12 col-md-5 card">
+            <div class="heading-and-link">
+              <div class="heading">
+                <div class="label">
+                  <h2 class="label2">{{ item.name }}</h2>
+                </div>
+              </div>
+              <div class="link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="black" class="bi bi-arrow-up-right-circle-fill" viewBox="0 0 16 16" id="icon">
+                    <path d="M0 8a8 8 0 1 0 16 0A8 8 0 0 0 0 8m5.904 2.803a.5.5 0 1 1-.707-.707L9.293 6H6.525a.5.5 0 1 1 0-1H10.5a.5.5 0 0 1 .5.5v3.975a.5.5 0 0 1-1 0V6.707z"/>
+                  </svg>
+                <div class="label3">
+                  <a href="{% url 'mlmodel' item.id %}" style="color: black;">
+                  Начать с {{ item.name }}
+                </a>
+                </div>
+              </div>
+            </div>
+            <div class="description">
+              <p>{{ item.description }}</p>
+            </div>
+          </div>
+    {% endfor %}
+</div>
+<div id="mainName" class="row">
+  <a href="{% url 'guideMetrics' %}"><button class="btn btn-primary">Метрики</button></a>
+  <h6 class="col">Скрипты для создания отчетов по разным задачам. С подробностями ознакомьтесь в разделе "Руководства" или по кнопке слева. Задумайтесь над текущим!</h6>
+</div>
+<div class="row" id="cardGrid">
+  {% for item in user.metrics.all %}
+  <div class="col-12 col-md-5 card">
+          <div class="heading-and-link">
+            <div class="heading">
+              <div class="label">
+                <h2 class="label2">{{ item.name }}</h2>
+              </div>
+            </div>
+            <div class="link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="black" class="bi bi-arrow-up-right-circle-fill" viewBox="0 0 16 16" id="icon">
+                  <path d="M0 8a8 8 0 1 0 16 0A8 8 0 0 0 0 8m5.904 2.803a.5.5 0 1 1-.707-.707L9.293 6H6.525a.5.5 0 1 1 0-1H10.5a.5.5 0 0 1 .5.5v3.975a.5.5 0 0 1-1 0V6.707z"/>
+                </svg>
+              <div class="label3"><a href="{% url 'metric' item.id%}" style="color: black;">
+                Начать с {{ item.name }}
+              </a></div>
+            </div>
+          </div>
+          <div class="description">
+            <p>{{ item.description }}</p>
+          </div>
+        </div>
+  {% endfor %}
+</div>
+<div id="mainName" class="row">
+  <a href="{% url 'archive' %}"><button class="btn btn-primary">Архив</button></a>
+    <h6 class="col">Сохраненные прогнозы и графики. Детальное описание ваших прогнозов и отчетов по метрикам ищите в разделе "Архив" или по кнопке слева. Вспомните прошлое!</h6>
+</div>
+<footer class="footer">
+    <div id="footercont" class="container">
+      <img id="whiteLogoFooter"src="{% static 'coffee/images/logo+namewhite.svg' %}">
+      <div class="row">
+        <div class="col-lg-6">
+     <h3>Остались вопросы?</h3>
+      <p class="whiteP preformatted-text">Email: coffeecrew.msk@gmail.com
+Телефон: 8 (985) 019-14-96
+Адрес: Мичуринский пр., 34, Москва, 119192</p>
+    </div>  
+</div>
+</div>
+  </footer>
+{% endblock content %}

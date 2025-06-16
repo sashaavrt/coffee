@@ -1,0 +1,44 @@
+{% extends "coffee/base.html" %}
+{% load static %}
+{% block content %}
+<div class="row">
+        <div class="col d-flex flex-column flex-shrink-0 p-3" style="width: 280px;"> 
+            <ul class="nav nav-pills flex-column mb-auto">
+              <li class="nav-item">
+                <a href="{% url 'guide' %}" class="nav-link text-dark">
+                  Модели
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'guideMetrics' %}" class="nav-link active text-white bg-dark">      
+                  Метрики
+                </a>
+              </li>
+            </ul>
+          </div>
+    <div class="col-lg-9">
+        <h1>Начнем</h1>
+        <p>Метрики — это ключевые цифры, которые помогают оценивать работу кофейни и понимать, что происходит в разные дни и часы.
+        </p>
+        <p>На портале вы увидите метрики продаж, средний чек, количество заказов, загруженность по времени и многое другое. Эти показатели нужны, чтобы видеть динамику: растём мы или снижаем обороты, в какие часы требуется больше внимания, какие продукты становятся любимыми у гостей.</p>
+        <p>Метрики основаны на реальных данных и обновляются регулярно. Они помогают анализировать текущую ситуацию и строить планы на будущее. Чем внимательнее мы к ним относимся, тем увереннее строится наша работа и тем комфортнее становится нашим гостям.
+
+        </p>
+    </div>
+</div>
+    <div>
+      {% for item in user.metrics.all %}
+        <div id="details_Main">
+        <details>
+            <summary>{{item.name}}</summary>
+            <p>{{item.tip1}}</p>
+            <p>{{item.tip2}}</p>
+            <p>{{item.tip3}}</p>
+        </details>
+    </div>
+        {% endfor %}
+    </div>
+<br>
+<br>
+<br>
+{% endblock content %}

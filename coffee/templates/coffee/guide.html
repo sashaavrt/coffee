@@ -1,0 +1,43 @@
+{% extends "coffee/base.html" %}
+{% load static %}
+{% block content %}
+<div class="row">
+  <div class="col d-flex flex-column flex-shrink-0 p-3" style="width: 280px;"> 
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <a href="{% url 'guide' %}" class="nav-link active text-white bg-dark">
+            Модели
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'guideMetrics' %}" class="nav-link text-dark">      
+            Метрики
+          </a>
+        </li>
+      </ul>
+    </div>
+<div class="col-lg-9">
+  <h1>Начнем</h1>
+  <p>Модели машинного обучения — это наши помощники в анализе больших объёмов данных. Они учатся находить закономерности в продажах, загруженности и потребностях гостей, чтобы помогать нам принимать более точные решения.</p>
+  <p>На нашем портале модели прогнозируют продажи, помогают планировать загрузку персонала и оценивать потребности в поставках. Все предсказания основаны на исторических данных нашей кофейни: когда больше всего гостей, какие товары популярнее, в какое время нужно больше сотрудников.
+  </p>
+  <p>Вам не нужно уметь настраивать модели — система делает это автоматически. Важно лишь понимать: модели дают прогноз, а не абсолютную истину. Они помогают лучше подготовиться к дню, увидеть возможные тренды и избежать неожиданных перегрузок.
+  </p>
+</div>
+</div>
+    <div>
+      {% for item in user.mlmodels.all %}
+        <div id="details_Main">
+        <details>
+            <summary>{{item.name}}</summary>
+            <p>{{item.tip1}}</p>
+            <p>{{item.tip2}}</p>
+            <p>{{item.tip3}}</p>
+        </details>
+    </div>
+        {% endfor %}
+    </div>
+<br>
+<br>
+<br>
+{% endblock content %}

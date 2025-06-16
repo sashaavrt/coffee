@@ -1,0 +1,46 @@
+{% extends 'coffee/base.html' %}
+{% block content %}
+<div class="container">
+    <h1>Архив отчетов, графиков и прогнозов</h1>
+    <hr>
+
+    <form method="get" class="mb-4">
+        <div class="row">
+            <div class="col">
+                <select name="report_type" class="form-control">
+                    <option value="">Все типы</option>
+                    <option value="graph">Графики</option>
+                    <option value="report">Отчёты</option>
+                    <option value="forecast">Прогнозы</option>
+                </select>
+            </div>
+            <div class="col">
+                <input type="text" name="q" class="form-control" placeholder="Поиск по названию или описанию">
+            </div>
+            <div class="col">
+                <select name="sort" class="form-control">
+                    <option value="desc">Новые сверху</option>
+                    <option value="asc">Старые сверху</option>
+                </select>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Фильтровать</button>
+            </div>
+        </div>
+    </form>
+
+    {% for report in reports %}
+        <div class="card mb-3 p-3">
+            <h5>{{ report.title }}</h5>
+            <p><strong>Тип:</strong> {{ report.get_report_type_display }}</p>
+            <p><strong>Дата создания:</strong> {{ report.created_at|date:"d M Y, H:i" }}</p>
+            {% if report.description %}
+                <p>{{ report.description }}</p>
+            {% endif %}
+            <a href="{{ report.file.url }}" class="btn btn-primary" style="height: auto;" download> Скачать</a>
+        </div>
+    {% empty %}
+        <p>Нет записей по заданным параметрам.</p>
+    {% endfor %}
+</div>
+{% endblock %}

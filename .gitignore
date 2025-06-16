@@ -1,0 +1,9 @@
+node_modules/
+db.sqlite3
+env/
+coffee/scripts/model_a_sales.pkl
+coffee/scripts/model_b_top3.pkl
+coffee/scripts/model_c_staff.pkl
+coffee/scripts/model_d_supply.pkl
+migrations/
+media/old_reports/
