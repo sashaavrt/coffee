@@ -1,0 +1,29 @@
+Barista Espresso — 187 ед.
+Biscotti — 65 ед.
+Black tea — 47 ед.
+Brewed Black tea — 134 ед.
+Brewed Chai tea — 199 ед.
+Brewed Green tea — 66 ед.
+Brewed herbal tea — 133 ед.
+Chai tea — 72 ед.
+Clothing — 22 ед.
+Drinking Chocolate — 47 ед.
+Drip coffee — 99 ед.
+Espresso Beans — 54 ед.
+Gourmet Beans — 53 ед.
+Gourmet brewed coffee — 199 ед.
+Green beans — 27 ед.
+Green tea — 24 ед.
+Herbal tea — 48 ед.
+Hot chocolate — 132 ед.
+House blend Beans — 24 ед.
+Housewares — 44 ед.
+Organic Beans — 47 ед.
+Organic Chocolate — 24 ед.
+Organic brewed coffee — 99 ед.
+Pastry — 65 ед.
+Premium Beans — 55 ед.
+Premium brewed coffee — 99 ед.
+Regular syrup — 98 ед.
+Scone — 109 ед.
+Sugar free syrup — 34 ед.
